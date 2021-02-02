@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Testing2
+namespace TestingCustomer
 {
     [TestClass]
     public class UnitTest1

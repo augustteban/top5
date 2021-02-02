@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Testing2
+namespace TestingCustomer
 {
-    class clsCustomer
+    public class clsCustomer
     {
         public int CustomerId { get; set; }
         public string Name { get; set; }

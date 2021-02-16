@@ -99,15 +99,27 @@ namespace TestingCustomer
         }
         public bool Find(int customerId)
         {
-            mCustomerId = 21;
-            mCreatedAt = Convert.ToDateTime("16/09/2019");
-            mName = "John Barao";
-            mPassword = "password123";
-            mEmailAddress = "email@gmail.com";
-            mAddress = "Test Address";
-            mLoyaltyPoints = 10.5;
-            mIsEmailConfirmed = true;
-            return true;
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@CustomerId", customerId);
+            DB.Execute("sproc_tblCustomer_FilterByCustomerId");
+
+            if (DB.Count == 1)
+            {
+                mCustomerId = Convert.ToInt32(DB.DataTable.Rows[0]["CustomerId"]);
+                mName = Convert.ToString(DB.DataTable.Rows[0]["Name"]);
+                mEmailAddress = Convert.ToString(DB.DataTable.Rows[0]["EmailAddress"]);
+                mAddress = Convert.ToString(DB.DataTable.Rows[0]["Address"]);
+                mPassword = Convert.ToString(DB.DataTable.Rows[0]["Password"]);
+                mIsEmailConfirmed = Convert.ToBoolean(DB.DataTable.Rows[0]["IsEmailConfirmed"]);
+                mLoyaltyPoints = Convert.ToDouble(DB.DataTable.Rows[0]["LoyaltyPoints"]);
+                mCreatedAt = Convert.ToDateTime(DB.DataTable.Rows[0]["CreatedAt"]);
+
+                return true;
+            }
+            else {
+                return false;
+
+            }
         }
 
         

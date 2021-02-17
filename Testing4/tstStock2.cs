@@ -22,8 +22,8 @@ namespace Testing4
             AnStock2.Stock2 = TestData;
             Assert.AreEqual(AnStock2.Stock2, TestData);
         }
-           
-        [TestMethod]   
+
+        [TestMethod]
         public void ProductNameOK()
         {
             clsStock2 Anstock2 = new clsStock2();
@@ -31,6 +31,15 @@ namespace Testing4
             Anstock2.ProductName = TestData;
             Assert.AreEqual(Anstock2.ProductName, TestData);
 
+        }
+
+        [TestMethod]
+        public void ProductDescriptionOk();
+        {
+            clsStock2 Anstock2 - New clsStock2();
+            string TestData = "Some silk material";
+            AnStock2.ProductDescription = TestData;
+            Assert.AreEqual(Anstock.ProductDescription, Testdata);
         }
     }
 }

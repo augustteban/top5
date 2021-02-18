@@ -1,4 +1,4 @@
-﻿namespace ClassLibrary
+﻿namespace TestingOrder
 {
     public class clsOrderLine
     {

@@ -166,6 +166,11 @@ namespace TestingCustomer
                 Error = Error + "The password must be between 6 and 50 characters long : ";
             }
 
+            if (!isEmailConfirmed.Equals("true") && !isEmailConfirmed.Equals("false"))
+            {
+                Error = Error + "The isEmailConfirmed must be either true or false : ";   
+            }
+
             return Error;
         }
     }

@@ -597,6 +597,35 @@ namespace TestingCustomer
             Assert.AreNotEqual(Error, "");
         }
 
+        [TestMethod]
+        public void IsEmailConfirmedMin()
+        {
+            clsCustomer Customer = new clsCustomer();
+            String Error = "";
+            string IsEmailConfirmed = "false";
+            Error = Customer.Valid(Name, EmailAddress, Address, Password, IsEmailConfirmed, LoyaltyPoints, CreatedAt);
+            Assert.AreEqual(Error, "");
+        }
 
+
+        [TestMethod]
+        public void IsEmailConfirmedMax()
+        {
+            clsCustomer Customer = new clsCustomer();
+            String Error = "";
+            string IsEmailConfirmed = "true";
+            Error = Customer.Valid(Name, EmailAddress, Address, Password, IsEmailConfirmed, LoyaltyPoints, CreatedAt);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void IsEmailConfirmedOtherTest()
+        {
+            clsCustomer Customer = new clsCustomer();
+            String Error = "";
+            string IsEmailConfirmed = "something";
+            Error = Customer.Valid(Name, EmailAddress, Address, Password, IsEmailConfirmed, LoyaltyPoints, CreatedAt);
+            Assert.AreNotEqual(Error, "");
+        }
     }
 }

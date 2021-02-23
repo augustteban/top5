@@ -143,7 +143,17 @@ namespace TestingCustomer
 
             if ((emailAddress.Length <= 10 && emailAddress.Length != 0) || emailAddress.Length > 50)
             {
-                Error = Error + "The email address must be between 10 and 50 characters long : ";
+                Error = Error + "The email address must be between 11 and 50 characters long : ";
+            }
+
+            if (address.Length == 0)
+            {
+                Error = Error + "The address cannot be blank : ";
+            }
+
+            if ((address.Length < 15 && address.Length != 0) || address.Length > 100)
+            {
+                Error = Error + "The address must be between 15 an 100 characters long : ";
             }
 
             return Error;

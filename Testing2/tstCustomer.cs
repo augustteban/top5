@@ -409,5 +409,102 @@ namespace TestingCustomer
             Error = Customer.Valid(Name, EmailAddress, Address, Password, IsEmailConfirmed, LoyaltyPoints, CreatedAt);
             Assert.AreNotEqual(Error, "");
         }
+
+        [TestMethod]
+        public void AddressExtremeMin()
+        {
+            clsCustomer Customer = new clsCustomer();
+            String Error = "";
+            string Address = "";
+            Error = Customer.Valid(Name, EmailAddress, Address, Password, IsEmailConfirmed, LoyaltyPoints, CreatedAt);
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void AddressMinLessOne()
+        {
+            clsCustomer Customer = new clsCustomer();
+            String Error = "";
+            string Address = "The House, Lei";
+            Error = Customer.Valid(Name, EmailAddress, Address, Password, IsEmailConfirmed, LoyaltyPoints, CreatedAt);
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void AddressMin()
+        {
+            clsCustomer Customer = new clsCustomer();
+            String Error = "";
+            string Address = "3 House, London";
+            Error = Customer.Valid(Name, EmailAddress, Address, Password, IsEmailConfirmed, LoyaltyPoints, CreatedAt);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void AddressMinPlusOne()
+        {
+            clsCustomer Customer = new clsCustomer();
+            String Error = "";
+            string Address = "33 House, London";
+            Error = Customer.Valid(Name, EmailAddress, Address, Password, IsEmailConfirmed, LoyaltyPoints, CreatedAt);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void AddressMaxLessOne()
+        {
+            clsCustomer Customer = new clsCustomer();
+            String Error = "";
+            string Address = "Apartment 1, The Honeyhive, 115 Princess Street," +
+                " Leicester, Leicestershire, LE3 8KD, United Kingdom";
+            Error = Customer.Valid(Name, EmailAddress, Address, Password, IsEmailConfirmed, LoyaltyPoints, CreatedAt);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void AddressMax()
+        {
+            clsCustomer Customer = new clsCustomer();
+            String Error = "";
+            string Address = "Apartment 11, The Honeyhive, 115 Princess Street, Leicester," +
+                " Leicestershire, LE3 8KD, United Kingdom";
+            Error = Customer.Valid(Name, EmailAddress, Address, Password, IsEmailConfirmed, LoyaltyPoints, CreatedAt);
+            Assert.AreEqual(Error, "");
+        }
+
+
+        [TestMethod]
+        public void AddressMaxPlusOne()
+        {
+            clsCustomer Customer = new clsCustomer();
+            String Error = "";
+            string Address = "Apartment 11, The Honeyhive, 1115 Princess Street, Leicester," +
+                " Leicestershire, LE3 8KD, United Kingdom";
+            Error = Customer.Valid(Name, EmailAddress, Address, Password, IsEmailConfirmed, LoyaltyPoints, CreatedAt);
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void AddressMid()
+        {
+            clsCustomer Customer = new clsCustomer();
+            String Error = "";
+            string Address = "Apartment 1, 1 Princess Street, Leicester, LE3 8KD";
+            Error = Customer.Valid(Name, EmailAddress, Address, Password, IsEmailConfirmed, LoyaltyPoints, CreatedAt);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void AddressExtremeMax()
+        {
+            clsCustomer Customer = new clsCustomer();
+            String Error = "";
+            string Address = "Apartment 11, The Honeyhive, 15 Princess Street, " +
+                "Leicester, Leicestershire, LE3 8KD, United Kingdom, Apartment 11, " +
+                "The Honeyhive, 15 Princess Street, Leicester, Leicestershire, LE3 8KD, United Kingdom";
+            Error = Customer.Valid(Name, EmailAddress, Address, Password, IsEmailConfirmed, LoyaltyPoints, CreatedAt);
+            Assert.AreNotEqual(Error, "");
+        }
+
     }
 }

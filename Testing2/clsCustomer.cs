@@ -131,6 +131,21 @@ namespace TestingCustomer
                 Error = Error + "The name cannot be blank : ";
             }
 
+            if (name.Length < 0 || name.Length == 1 || name.Length > 50)
+            {
+                Error = Error + "The name must be between 2 and 50 characters long : ";
+            }
+
+            if (emailAddress.Length == 0)
+            {
+                Error = Error + "The email address cannot be blank : ";
+            }
+
+            if ((emailAddress.Length <= 10 && emailAddress.Length != 0) || emailAddress.Length > 50)
+            {
+                Error = Error + "The email address must be between 10 and 50 characters long : ";
+            }
+
             return Error;
         }
     }

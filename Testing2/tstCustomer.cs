@@ -16,7 +16,7 @@ namespace TestingCustomer
         string CreatedAt = DateTime.Now.Date.ToString();
 
 
-
+      /**
         [TestMethod]
         public void InstanceOK()
         {
@@ -214,6 +214,7 @@ namespace TestingCustomer
             }
             Assert.IsTrue(OK);
         }
+    **/
 
         //WEEK 21 work begins
 
@@ -224,9 +225,9 @@ namespace TestingCustomer
             Error = Customer.Valid(Name, EmailAddress, Address, Password, IsEmailConfirmed, LoyaltyPoints, CreatedAt);
             Assert.AreEqual(Error, "");
         }
-  
+
         [TestMethod]
-        public void NameMinLessOne()
+        public void NameExtremeMin()
         {
             clsCustomer Customer = new clsCustomer();
             String Error = "";
@@ -235,5 +236,178 @@ namespace TestingCustomer
             Assert.AreNotEqual(Error, "");
         }
 
+        [TestMethod]
+        public void NameMinLessOne()
+        {
+            clsCustomer Customer = new clsCustomer();
+            String Error = "";
+            string Name = "J";
+            Error = Customer.Valid(Name, EmailAddress, Address, Password, IsEmailConfirmed, LoyaltyPoints, CreatedAt);
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void NameMin()
+        {
+            clsCustomer Customer = new clsCustomer();
+            String Error = "";
+            string Name = "Jo";
+            Error = Customer.Valid(Name, EmailAddress, Address, Password, IsEmailConfirmed, LoyaltyPoints, CreatedAt);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void NameMinPlusOne()
+        {
+            clsCustomer Customer = new clsCustomer();
+            String Error = "";
+            string Name = "Joe";
+            Error = Customer.Valid(Name, EmailAddress, Address, Password, IsEmailConfirmed, LoyaltyPoints, CreatedAt);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void NameMaxLessOne()
+        {
+            clsCustomer Customer = new clsCustomer();
+            String Error = "";
+            string Name = "Duke The Fourth Johannah Bridgertton Williamsbury";
+            Error = Customer.Valid(Name, EmailAddress, Address, Password, IsEmailConfirmed, LoyaltyPoints, CreatedAt);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void NameMax()
+        {
+            clsCustomer Customer = new clsCustomer();
+            String Error = "";
+            string Name = "Duke The Fourth Johannah Bridgertton Williamsburry";
+            Error = Customer.Valid(Name, EmailAddress, Address, Password, IsEmailConfirmed, LoyaltyPoints, CreatedAt);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void NameMaxPlusOne()
+        {
+            clsCustomer Customer = new clsCustomer();
+            String Error = "";
+            string Name = "Duke The Fourth Johhannah Bridgertton Williamsburry";
+            Error = Customer.Valid(Name, EmailAddress, Address, Password, IsEmailConfirmed, LoyaltyPoints, CreatedAt);
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void NameMid()
+        {
+            clsCustomer Customer = new clsCustomer();
+            String Error = "";
+            string Name = "James William Bruckington";
+            Error = Customer.Valid(Name, EmailAddress, Address, Password, IsEmailConfirmed, LoyaltyPoints, CreatedAt);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void NameExtremeMax()
+        {
+            clsCustomer Customer = new clsCustomer();
+            String Error = "";
+            string Name = "James William Bruckington ajdalkdj alkd jakldj alsdj alsdj alsdj" +
+                " alsdj lasdj alsd jaldj alsdj alksdj lkasd jalksd ajls asdakldj alksdj kladj" +
+                " klasdjlkadjlasdjlksadjlakdjlkasdjalaskdjaklsdjaklsdjalkdjalksdjlkasdjlsajdk" +
+                "sdjaklsdjalksdjlkasjdlkasjdlad alsdj ss";
+            Error = Customer.Valid(Name, EmailAddress, Address, Password, IsEmailConfirmed, LoyaltyPoints, CreatedAt);
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void EmailAddressExtremeMin()
+        {
+            clsCustomer Customer = new clsCustomer();
+            String Error = "";
+            string EmailAddress = "";
+            Error = Customer.Valid(Name, EmailAddress, Address, Password, IsEmailConfirmed, LoyaltyPoints, CreatedAt);
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void EmailAddressMinLessOne()
+        {
+            clsCustomer Customer = new clsCustomer();
+            String Error = "";
+            string EmailAddress = "jo@mail.co";
+            Error = Customer.Valid(Name, EmailAddress, Address, Password, IsEmailConfirmed, LoyaltyPoints, CreatedAt);
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void EmailAddressMin()
+        {
+            clsCustomer Customer = new clsCustomer();
+            String Error = "";
+            string EmailAddress = "jo@mail.com";
+            Error = Customer.Valid(Name, EmailAddress, Address, Password, IsEmailConfirmed, LoyaltyPoints, CreatedAt);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void EmailAddressMinPlusOne()
+        {
+            clsCustomer Customer = new clsCustomer();
+            String Error = "";
+            string EmailAddress = "joe@mail.com";
+            Error = Customer.Valid(Name, EmailAddress, Address, Password, IsEmailConfirmed, LoyaltyPoints, CreatedAt);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void EmailAddressMaxLessOne()
+        {
+            clsCustomer Customer = new clsCustomer();
+            String Error = "";
+            string EmailAddress = "testingemailaddressandsomethingelse12@gmail.co.uk";
+            Error = Customer.Valid(Name, EmailAddress, Address, Password, IsEmailConfirmed, LoyaltyPoints, CreatedAt);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void EmailAddressMax()
+        {
+            clsCustomer Customer = new clsCustomer();
+            String Error = "";
+            string EmailAddress = "testingemailaddressandsomethingelse123@gmail.co.uk";
+            Error = Customer.Valid(Name, EmailAddress, Address, Password, IsEmailConfirmed, LoyaltyPoints, CreatedAt);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void EmailAddressMaxPlusOne()
+        {
+            clsCustomer Customer = new clsCustomer();
+            String Error = "";
+            string EmailAddress = "testingemailaddressandsomethingelse1234@gmail.co.uk";
+            Error = Customer.Valid(Name, EmailAddress, Address, Password, IsEmailConfirmed, LoyaltyPoints, CreatedAt);
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void EmailAddressMid()
+        {
+            clsCustomer Customer = new clsCustomer();
+            String Error = "";
+            string EmailAddress = "joebloggerson@yahoo.co.uk";
+            Error = Customer.Valid(Name, EmailAddress, Address, Password, IsEmailConfirmed, LoyaltyPoints, CreatedAt);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void EmailAddressExtremeMax()
+        {
+            clsCustomer Customer = new clsCustomer();
+            String Error = "";
+            string EmailAddress = "joebloggersonjoebloggersonjoebloggersonjoebloggersonjoe" +
+                "bloggersonjoebloggersonfamilytrio@yahoo.co.uk";
+            Error = Customer.Valid(Name, EmailAddress, Address, Password, IsEmailConfirmed, LoyaltyPoints, CreatedAt);
+            Assert.AreNotEqual(Error, "");
+        }
     }
 }

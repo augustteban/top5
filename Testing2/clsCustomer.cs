@@ -156,6 +156,16 @@ namespace TestingCustomer
                 Error = Error + "The address must be between 15 an 100 characters long : ";
             }
 
+            if (password.Length == 0)
+            {
+                Error = Error + "The password cannot be blank : ";
+            }
+
+            if ((password.Length <= 5 && password.Length != 0) || password.Length > 50)
+            {
+                Error = Error + "The password must be between 6 and 50 characters long : ";
+            }
+
             return Error;
         }
     }

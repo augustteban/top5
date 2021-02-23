@@ -15,8 +15,6 @@ namespace TestingCustomer
         string LoyaltyPoints = "10.5";
         string CreatedAt = DateTime.Now.Date.ToString();
 
-
-      /**
         [TestMethod]
         public void InstanceOK()
         {
@@ -214,7 +212,6 @@ namespace TestingCustomer
             }
             Assert.IsTrue(OK);
         }
-    **/
 
         //WEEK 21 work begins
 
@@ -714,6 +711,77 @@ namespace TestingCustomer
             clsCustomer Customer = new clsCustomer();
             String Error = "";
             string LoyaltyPoints = "something";
+            Error = Customer.Valid(Name, EmailAddress, Address, Password, IsEmailConfirmed, LoyaltyPoints, CreatedAt);
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void CreatedAtExtremeMin()
+        {
+            clsCustomer Customer = new clsCustomer();
+            String Error = "";
+            string CreatedAt = "something";
+            Error = Customer.Valid(Name, EmailAddress, Address, Password, IsEmailConfirmed, LoyaltyPoints, CreatedAt);
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void CreatedAtMinLessOne()
+        {
+            clsCustomer Customer = new clsCustomer();
+            String Error = "";
+            DateTime TestDate;
+            TestDate = DateTime.Now.Date;
+            TestDate = TestDate.AddDays(-1);
+            string CreatedAt = TestDate.ToString();
+            Error = Customer.Valid(Name, EmailAddress, Address, Password, IsEmailConfirmed, LoyaltyPoints, CreatedAt);
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void CreatedAtMin()
+        {
+            clsCustomer Customer = new clsCustomer();
+            String Error = "";
+            DateTime TestDate;
+            TestDate = DateTime.Now.Date;
+            string CreatedAt = TestDate.ToString();
+            Error = Customer.Valid(Name, EmailAddress, Address, Password, IsEmailConfirmed, LoyaltyPoints, CreatedAt);
+            Assert.AreEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void CreatedAtMinPlusOne()
+        {
+            clsCustomer Customer = new clsCustomer();
+            String Error = "";
+            DateTime TestDate;
+            TestDate = DateTime.Now.Date;
+            TestDate = TestDate.AddDays(1);
+            string CreatedAt = TestDate.ToString();
+            Error = Customer.Valid(Name, EmailAddress, Address, Password, IsEmailConfirmed, LoyaltyPoints, CreatedAt);
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void CreatedAtExtremeMax()
+        {
+            clsCustomer Customer = new clsCustomer();
+            String Error = "";
+            DateTime TestDate;
+            TestDate = DateTime.Now.Date;
+            TestDate = TestDate.AddYears(99);
+            string CreatedAt = TestDate.ToString();
+            Error = Customer.Valid(Name, EmailAddress, Address, Password, IsEmailConfirmed, LoyaltyPoints, CreatedAt);
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
+        public void CreatedAtInvalidDataType()
+        {
+            clsCustomer Customer = new clsCustomer();
+            String Error = "";
+            string CreatedAt = "something";
             Error = Customer.Valid(Name, EmailAddress, Address, Password, IsEmailConfirmed, LoyaltyPoints, CreatedAt);
             Assert.AreNotEqual(Error, "");
         }

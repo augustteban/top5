@@ -187,9 +187,28 @@ namespace TestingCustomer
                     Error = Error + "The loyaltyPoints must be less than 999999999999999999.99 : ";
                 }
 
-            } catch (Exception e)
+            } catch
             {
                 Error = Error + "The loyaltyPoints must be a number : ";
+            }
+
+            try
+            {
+                DateTime createdDate = Convert.ToDateTime(createdAt);
+
+                if (createdDate < DateTime.Now.Date)
+                {
+                    Error = Error + "The createdAt cannot be in the past : ";
+                }
+
+                if (createdDate > DateTime.Now.Date)
+                {
+                    Error = Error + "The createdAt cannot be in the future : ";
+                }
+
+            } catch
+            {
+                Error = Error + "The createdAt must be of type DateTime : ";
             }
           
             return Error;

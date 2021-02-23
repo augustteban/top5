@@ -6,6 +6,17 @@ namespace TestingCustomer
     [TestClass]
     public class UnitTest1
     {
+        //good test data
+        string Name = "John Smith";
+        string EmailAddress = "jsmith1987@gmail.com";
+        string Address = "Flat 10, Charles street, Leicester";
+        string Password = "secret123";
+        string IsEmailConfirmed = "true";
+        string LoyaltyPoints = "10.5";
+        string CreatedAt = DateTime.Now.Date.ToString();
+
+
+
         [TestMethod]
         public void InstanceOK()
         {
@@ -203,5 +214,26 @@ namespace TestingCustomer
             }
             Assert.IsTrue(OK);
         }
+
+        //WEEK 21 work begins
+
+        [TestMethod]
+        public void ValidMethodOK() {
+            clsCustomer Customer = new clsCustomer();
+            String Error = "";
+            Error = Customer.Valid(Name, EmailAddress, Address, Password, IsEmailConfirmed, LoyaltyPoints, CreatedAt);
+            Assert.AreEqual(Error, "");
+        }
+  
+        [TestMethod]
+        public void NameMinLessOne()
+        {
+            clsCustomer Customer = new clsCustomer();
+            String Error = "";
+            string Name = "";
+            Error = Customer.Valid(Name, EmailAddress, Address, Password, IsEmailConfirmed, LoyaltyPoints, CreatedAt);
+            Assert.AreNotEqual(Error, "");
+        }
+
     }
 }

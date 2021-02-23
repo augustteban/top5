@@ -122,6 +122,16 @@ namespace TestingCustomer
             }
         }
 
-        
+        public string Valid(string name, string emailAddress, string address, string password, string isEmailConfirmed, string loyaltyPoints, string createdAt)
+        {
+            String Error = "";
+
+            if (name.Length == 0)
+            {
+                Error = Error + "The name cannot be blank : ";
+            }
+
+            return Error;
+        }
     }
 }

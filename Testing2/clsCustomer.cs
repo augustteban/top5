@@ -171,6 +171,27 @@ namespace TestingCustomer
                 Error = Error + "The isEmailConfirmed must be either true or false : ";   
             }
 
+            try
+            {
+                double points = Convert.ToDouble(loyaltyPoints);
+
+                if (points < 0)
+                {
+                    Error = Error + "The loyaltyPoints must be greater than 0 : ";
+                }
+
+                Console.Write(points);
+
+                if (points > 999999999999999999.99)
+                {
+                    Error = Error + "The loyaltyPoints must be less than 999999999999999999.99 : ";
+                }
+
+            } catch (Exception e)
+            {
+                Error = Error + "The loyaltyPoints must be a number : ";
+            }
+          
             return Error;
         }
     }

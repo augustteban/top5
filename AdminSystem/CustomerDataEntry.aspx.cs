@@ -16,19 +16,38 @@ public partial class _1_DataEntry : System.Web.UI.Page
     protected void btnOK_Click(object sender, EventArgs e)
     {
         clsCustomer Customer = new clsCustomer();
-        Customer.CustomerId = Int32.Parse(txtCustomerId.Text);
-        Customer.Name = txtName.Text;
-        Customer.EmailAddress = txtEmailAddress.Text;
-        Customer.Address = txtAddress.Text;
-        Customer.Password = txtPassword.Text;
-        Customer.LoyaltyPoints = Double.Parse(txtLoyaltyPoints.Text);
-        Customer.CreatedAt = DateTime.Parse(txtCreatedAt.Text);
-        Customer.isEmailConfirmed = chkIsEmailConfirmed.Checked;
 
-        Session["Customer"] = Customer;
+        string Name = txtName.Text;
+        string EmailAddress = txtEmailAddress.Text;
+        string Address = txtAddress.Text;
+        string Password = txtPassword.Text;
+        string LoyaltyPoints = txtLoyaltyPoints.Text;
+        string CreatedAt = txtCreatedAt.Text;
+        string isEmailConfirmed = chkIsEmailConfirmed.Checked ? "true" : "false";
 
-        //navigate to the viewer page
-        Response.Redirect("CustomerViewer.aspx");
+        string Error = Customer.Valid(Name, EmailAddress, Address, Password, isEmailConfirmed, LoyaltyPoints, CreatedAt);
+
+        if (Error == "")
+        {
+            Customer.CustomerId = Int32.Parse(txtCustomerId.Text);
+            Customer.Name = Name;
+            Customer.EmailAddress = EmailAddress;
+            Customer.Address = Address;
+            Customer.Password = Password;
+            Customer.LoyaltyPoints = Double.Parse(LoyaltyPoints);
+            Customer.CreatedAt = DateTime.Parse(CreatedAt);
+            Customer.isEmailConfirmed = chkIsEmailConfirmed.Checked;
+
+            Session["Customer"] = Customer;
+
+            //navigate to the viewer page
+            Response.Redirect("CustomerViewer.aspx");
+        }
+        else
+        {
+            lblError.Text = Error;
+        }
+       
     }
 
     protected void btnFind_Click(object sender, EventArgs e)

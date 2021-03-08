@@ -11,18 +11,18 @@ public partial class _1Viewer : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         // create an instance
-        clsOrderLine AnOrderLine = new clsOrderLine();
+        clsOrder AnOrder = new clsOrder();
 
         // get the data from session object
-        AnOrderLine = (clsOrderLine)Session["AnOrderLine"];
+        AnOrder = (clsOrder)Session["AnOrder"];
 
 
-        Response.Write(AnOrderLine.OrderLineId);
-        Response.Write(AnOrderLine.OrderId);
-        Response.Write(AnOrderLine.ItemId);
-        Response.Write(AnOrderLine.Quantity);
-        Response.Write(AnOrderLine.Description);
-        Response.Write(AnOrderLine.Price);
-
+        
+        Response.Write(AnOrder.OrderId);
+        Response.Write(AnOrder.CustomerId);
+        Response.Write(AnOrder.ShippingAddress);
+        Response.Write(AnOrder.ShippingDate);
+        Response.Write(AnOrder.Payment);
+        Response.Write(AnOrder.TotalPrice);
     }
 }

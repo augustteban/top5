@@ -13,20 +13,23 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
     }
 
-    protected void btnOk_Click(object sender, EventArgs e)
+    protected void btnOK_Click(object sender, EventArgs e)
     {
+
         // create a new instance of clsOrderLine
-        clsOrderLine AnOrderLine = new clsOrderLine();
+        clsOrder AnOrder = new clsOrder();
 
-        AnOrderLine.OrderLineId = Int32.Parse(txtOrderLineId.Text);
-        AnOrderLine.OrderId = Int32.Parse(txtOrderId.Text);
-        AnOrderLine.ItemId = Int32.Parse(txtItemId.Text);
-        AnOrderLine.Quantity = Int32.Parse(txtQuantity.Text);
-        AnOrderLine.Description = txtDescription.Text;
-        AnOrderLine.Price = Double.Parse(txtPrice.Text);
-        Session["AnOrderLine"] = AnOrderLine;
+        
+        AnOrder.OrderId = Int32.Parse(txtOrderId.Text);
+        AnOrder.CustomerId = Int32.Parse(txtCustomerId.Text);
+        AnOrder.ShippingAddress = txtShippingAddress.Text;
+        AnOrder.ShippingDate = DateTime.Parse(txtShippingDate.Text);
+        AnOrder.Payment = Boolean.Parse(txtPayment.Text);
+        AnOrder.TotalPrice = Double.Parse(txtTotalPrice.Text);
+        Session["AnOrder"] = AnOrder;
 
-        // nevigate to the viewr page
+
+        //navigate to the viewer page
         Response.Redirect("OrderViewer.aspx");
     }
 }

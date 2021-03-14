@@ -40,7 +40,6 @@ namespace TestingCustomer
 
         }
 
-
         [TestMethod]
         public void AddMethodOK()
         {
@@ -59,6 +58,40 @@ namespace TestingCustomer
             PrimaryKey = AllCustomers.Add();
             TestItem.CustomerId = PrimaryKey;
             AllCustomers.ThisCustomer.Find(PrimaryKey);
+            Assert.AreEqual(AllCustomers.ThisCustomer, TestItem);
+        }
+
+        [TestMethod]
+        public void UpdateMethodOK()
+        {
+            clsCustomerCollection AllCustomers = new clsCustomerCollection();
+            clsCustomer TestItem = new clsCustomer();
+            Int32 PrimaryKey = 0;
+            TestItem.Name = "John Smith";
+            TestItem.EmailAddress = "jsmith1987@gmail.com";
+            TestItem.Address = "Flat 10, Charles street, Leicester";
+            TestItem.Password = "secret123";
+            TestItem.isEmailConfirmed = true;
+            TestItem.LoyaltyPoints = 10.5;
+            TestItem.CreatedAt = DateTime.Now.Date;
+
+            AllCustomers.ThisCustomer = TestItem;
+            PrimaryKey = AllCustomers.Add();
+            TestItem.CustomerId = PrimaryKey;
+
+            // Modify data
+            TestItem.Name = "Johnny Smith";
+            TestItem.EmailAddress = "jsmith1887@gmail.com";
+            TestItem.Address = "Flat 21, Charles street, Leicester";
+            TestItem.Password = "secret321";
+            TestItem.isEmailConfirmed = false;
+            TestItem.LoyaltyPoints = 12.5;
+            TestItem.CreatedAt = DateTime.Now.Date;
+
+            AllCustomers.ThisCustomer = TestItem;
+            AllCustomers.Update();
+            AllCustomers.ThisCustomer.Find(PrimaryKey);
+
             Assert.AreEqual(AllCustomers.ThisCustomer, TestItem);
         }
     }

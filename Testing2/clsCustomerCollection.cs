@@ -85,5 +85,19 @@ namespace TestingCustomer
 
             return DB.Execute("sproc_tblCustomer_Insert");
         }
+
+        public int Update()
+        {
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@Name", mThisCustomer.Name);
+            DB.AddParameter("@EmailAddress", mThisCustomer.EmailAddress);
+            DB.AddParameter("@Address", mThisCustomer.Address);
+            DB.AddParameter("@Password", mThisCustomer.Password);
+            DB.AddParameter("@IsEmailConfirmed", mThisCustomer.isEmailConfirmed);
+            DB.AddParameter("@LoyaltyPoints", mThisCustomer.LoyaltyPoints);
+            DB.AddParameter("@CreatedAt", mThisCustomer.CreatedAt);
+
+            return DB.Execute("sproc_tblCustomer_Update");
+        }
     }
 }

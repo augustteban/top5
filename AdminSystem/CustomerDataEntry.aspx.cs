@@ -38,10 +38,12 @@ public partial class _1_DataEntry : System.Web.UI.Page
             Customer.CreatedAt = DateTime.Parse(CreatedAt);
             Customer.isEmailConfirmed = chkIsEmailConfirmed.Checked;
 
-            Session["Customer"] = Customer;
+            clsCustomerCollection CustomerList = new clsCustomerCollection();
+            CustomerList.ThisCustomer = Customer;
+            CustomerList.Add();
 
             //navigate to the viewer page
-            Response.Redirect("CustomerViewer.aspx");
+            Response.Redirect("CustomerList.aspx");
         }
         else
         {

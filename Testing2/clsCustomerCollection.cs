@@ -89,6 +89,7 @@ namespace TestingCustomer
         public int Update()
         {
             clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@CustomerId", mThisCustomer.CustomerId);
             DB.AddParameter("@Name", mThisCustomer.Name);
             DB.AddParameter("@EmailAddress", mThisCustomer.EmailAddress);
             DB.AddParameter("@Address", mThisCustomer.Address);

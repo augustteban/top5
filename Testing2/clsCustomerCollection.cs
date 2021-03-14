@@ -100,5 +100,13 @@ namespace TestingCustomer
 
             return DB.Execute("sproc_tblCustomer_Update");
         }
+
+        public void Delete()
+        {
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@CustomerId", mThisCustomer.CustomerId);
+
+            DB.Execute("sproc_tblCustomer_Delete");
+        }
     }
 }

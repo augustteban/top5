@@ -94,5 +94,29 @@ namespace TestingCustomer
 
             Assert.AreEqual(AllCustomers.ThisCustomer, TestItem);
         }
+
+        [TestMethod]
+        public void DeleteMethodOK()
+        {
+            clsCustomerCollection AllCustomers = new clsCustomerCollection();
+            clsCustomer TestItem = new clsCustomer();
+            Int32 PrimaryKey = 0;
+            TestItem.Name = "John Smith";
+            TestItem.EmailAddress = "jsmith1987@gmail.com";
+            TestItem.Address = "Flat 10, Charles street, Leicester";
+            TestItem.Password = "secret123";
+            TestItem.isEmailConfirmed = true;
+            TestItem.LoyaltyPoints = 10.5;
+            TestItem.CreatedAt = DateTime.Now.Date;
+
+            AllCustomers.ThisCustomer = TestItem;
+            PrimaryKey = AllCustomers.Add();
+            TestItem.CustomerId = PrimaryKey;
+            AllCustomers.ThisCustomer.Find(PrimaryKey);
+            AllCustomers.Delete();
+
+            Boolean Found = AllCustomers.ThisCustomer.Find(PrimaryKey);
+            Assert.IsFalse(Found);
+        }
     }
 }

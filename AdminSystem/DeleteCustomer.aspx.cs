@@ -21,4 +21,10 @@ public partial class DeleteCustomer : System.Web.UI.Page
         Customers.Delete();
         Response.Redirect("CustomerList.aspx");
     }
+
+    protected void btnNo_Click(object sender, EventArgs e)
+    {
+        clsCustomerCollection Customers = new clsCustomerCollection();
+        Response.Redirect("CustomerList.aspx");
+    }
 }

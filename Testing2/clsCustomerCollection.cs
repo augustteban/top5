@@ -9,6 +9,7 @@ namespace TestingCustomer
     public class clsCustomerCollection
     {
         List<clsCustomer> mCustomerList = new List<clsCustomer>();
+        clsCustomer mThisCustomer = new clsCustomer();
 
         public clsCustomerCollection()
         {
@@ -51,10 +52,38 @@ namespace TestingCustomer
 
         public int Count
         {
-            get { return mCustomerList.Count;
+            get
+            {
+                return mCustomerList.Count;
             }
-            set {
+            set
+            {
             }
+        }
+
+        public clsCustomer ThisCustomer
+        {
+            get
+            {
+                return mThisCustomer;
+            }
+            set
+            {
+                mThisCustomer = value;
+            }
+        }
+
+        public int Add() {
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@Name", mThisCustomer.Name);
+            DB.AddParameter("@EmailAddress", mThisCustomer.EmailAddress);
+            DB.AddParameter("@Address", mThisCustomer.Address);
+            DB.AddParameter("@Password", mThisCustomer.Password);
+            DB.AddParameter("@IsEmailConfirmed", mThisCustomer.isEmailConfirmed);
+            DB.AddParameter("@LoyaltyPoints", mThisCustomer.LoyaltyPoints);
+            DB.AddParameter("@CreatedAt", mThisCustomer.CreatedAt);
+
+            return DB.Execute("sproc_tblCustomer_Insert");
         }
     }
 }

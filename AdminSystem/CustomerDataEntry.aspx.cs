@@ -8,9 +8,29 @@ using TestingCustomer;
 
 public partial class _1_DataEntry : System.Web.UI.Page
 {
+    Int32 CustomerId;
     protected void Page_Load(object sender, EventArgs e)
     {
+        CustomerId = Convert.ToInt32(Session["CustomerId"]);
+        if (IsPostBack == false) {
+            if (CustomerId != -1) {
+                DisplayCustomer();
+            }
+        }
+    }
 
+    void DisplayCustomer()
+    {
+        clsCustomerCollection Customers = new clsCustomerCollection();
+        Customers.ThisCustomer.Find(CustomerId);
+
+        txtName.Text = Customers.ThisCustomer.Name;
+        txtEmailAddress.Text = Customers.ThisCustomer.EmailAddress;
+        txtAddress.Text = Customers.ThisCustomer.Address;
+        txtPassword.Text = Customers.ThisCustomer.Password;
+        txtLoyaltyPoints.Text = Customers.ThisCustomer.LoyaltyPoints.ToString();
+        txtCreatedAt.Text = Customers.ThisCustomer.CreatedAt.ToString();
+        chkIsEmailConfirmed.Checked = Customers.ThisCustomer.isEmailConfirmed;
     }
 
     protected void btnOK_Click(object sender, EventArgs e)
@@ -29,7 +49,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
         if (Error == "")
         {
-            Customer.CustomerId = Int32.Parse(txtCustomerId.Text);
+            Customer.CustomerId = CustomerId;
             Customer.Name = Name;
             Customer.EmailAddress = EmailAddress;
             Customer.Address = Address;
@@ -39,8 +59,17 @@ public partial class _1_DataEntry : System.Web.UI.Page
             Customer.isEmailConfirmed = chkIsEmailConfirmed.Checked;
 
             clsCustomerCollection CustomerList = new clsCustomerCollection();
-            CustomerList.ThisCustomer = Customer;
-            CustomerList.Add();
+            if (CustomerId == -1)
+            {
+                CustomerList.ThisCustomer = Customer;
+                CustomerList.Add();
+            }
+            else
+            {
+                CustomerList.ThisCustomer.Find(CustomerId);
+                CustomerList.ThisCustomer = Customer;
+                CustomerList.Update();
+            }
 
             //navigate to the viewer page
             Response.Redirect("CustomerList.aspx");

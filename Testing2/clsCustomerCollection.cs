@@ -8,16 +8,15 @@ namespace TestingCustomer
 {
     public class clsCustomerCollection
     {
-        List<clsCustomer> mCustomerList = new List<clsCustomer>();
+        List<clsCustomer> mCustomerList;
         clsCustomer mThisCustomer = new clsCustomer();
 
-        public clsCustomerCollection()
+        void PopulateArray(clsDataConnection DB)
         {
             Int32 Index = 0;
             Int32 RecordCount = 0;
-            clsDataConnection DB = new clsDataConnection();
-            DB.Execute("sproc_tblCustomer_SelectAll");
             RecordCount = DB.Count;
+            mCustomerList = new List<clsCustomer>();
             while (Index < RecordCount)
             {
                 clsCustomer ACustomer = new clsCustomer();
@@ -35,6 +34,13 @@ namespace TestingCustomer
                 Index++;
 
             }
+        }
+        public clsCustomerCollection()
+        {
+    
+            clsDataConnection DB = new clsDataConnection();
+            DB.Execute("sproc_tblCustomer_SelectAll");
+            PopulateArray(DB);
         }
 
         public List<clsCustomer> CustomerList
@@ -107,6 +113,14 @@ namespace TestingCustomer
             DB.AddParameter("@CustomerId", mThisCustomer.CustomerId);
 
             DB.Execute("sproc_tblCustomer_Delete");
+        }
+
+        public void ReportByName(string name)
+        {
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@Name", name);
+            DB.Execute("sproc_tblCustomer_FilterByName");
+            PopulateArray(DB);
         }
     }
 }

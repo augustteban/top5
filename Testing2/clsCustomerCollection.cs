@@ -115,11 +115,11 @@ namespace TestingCustomer
             DB.Execute("sproc_tblCustomer_Delete");
         }
 
-        public void ReportByEmail(string email)
+        public void ReportByName(string name)
         {
             clsDataConnection DB = new clsDataConnection();
-            DB.AddParameter("@EmailAddress", email);
-            DB.Execute("sproc_tblCustomer_FilterByEmail");
+            DB.AddParameter("@Name", name);
+            DB.Execute("sproc_tblCustomer_FilterByName");
             PopulateArray(DB);
         }
     }

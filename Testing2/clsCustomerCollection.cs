@@ -108,5 +108,10 @@ namespace TestingCustomer
 
             DB.Execute("sproc_tblCustomer_Delete");
         }
+
+        public void ReportByEmail(string email)
+        {
+            
+        }
     }
 }

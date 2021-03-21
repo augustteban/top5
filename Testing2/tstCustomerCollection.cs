@@ -118,5 +118,22 @@ namespace TestingCustomer
             Boolean Found = AllCustomers.ThisCustomer.Find(PrimaryKey);
             Assert.IsFalse(Found);
         }
+
+        [TestMethod]
+        public void ReportByEmailMethodOK()
+        {
+            clsCustomerCollection AllCustomers = new clsCustomerCollection();
+            clsCustomerCollection FilteredCustomers = new clsCustomerCollection();
+            FilteredCustomers.ReportByEmail("");
+            Assert.AreEqual(AllCustomers.Count, FilteredCustomers.Count);
+        }
+
+        [TestMethod]
+        public void ReportByEmailMethodNoneFound()
+        {
+            clsCustomerCollection FilteredCustomers = new clsCustomerCollection();
+            FilteredCustomers.ReportByEmail("test@test.com");
+            Assert.AreEqual(0, FilteredCustomers.Count);
+        }
     }
 }

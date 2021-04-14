@@ -142,10 +142,39 @@ namespace TestingOrder
 
         public bool Find(int orderLineId)
         {
-            // set the private data members to the tsts data value
-            mOrderLineId = 21;
-           // always return true
-            return true;
+            // create an instance of the data connection 
+            clsDataConnection DB = new clsDataConnection();
+
+            // add the parameter for the order line id to search for 
+            DB.AddParameter("@OrderLineId", orderLineId);
+
+            // execute the stored procedure 
+            DB.Execute("sproc_tblOrderLine_FilterByOrderLineId");
+            // if one record is found (there should be either zero or one!)
+            if (DB.Count == 1)
+            {
+                // copy the data from database to the private data members
+                mOrderLineId = Convert.ToInt32(DB.DataTable.Rows[0]["OrderLineId"]);
+                mOrderId = Convert.ToInt32(DB.DataTable.Rows[0]["OrderId"]);
+                mItemId = Convert.ToInt32(DB.DataTable.Rows[0]["ItemId"]);
+                mQuantity = Convert.ToInt32(DB.DataTable.Rows[0]["Quantity"]);
+                mDescription = Convert.ToString(DB.DataTable.Rows[0]["Description"]);
+                mPrice = Convert.ToDouble(DB.DataTable.Rows[0]["Price"]);
+                mActive = Convert.ToBoolean(DB.DataTable.Rows[0]["Active"]);
+                
+                // return that everything worked OK
+                return true;
+            }
+            // if no record was found 
+            else
+            {
+                // return false indicating a prblem
+                return false;
+            }
+           
+
+
+
         }
     }
 }

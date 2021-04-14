@@ -59,8 +59,8 @@ namespace TestingOrder
         }
 
 
-        private double mTotalPrice;
-        public double TotalPrice
+        private Double mTotalPrice;
+        public Double TotalPrice
         {
             get
             {
@@ -134,9 +134,40 @@ namespace TestingOrder
 
         public bool Find(int orderId)
         {
-            mOrderId = 21;
-            mShippingDate = Convert.ToDateTime("16/08/2019");
-            return true;
+            // create an instance of the data connection 
+            clsDataConnection DB = new clsDataConnection();
+
+            // add the parameter for the order line id to search for 
+            DB.AddParameter("@OrderId", orderId);
+
+            // execute the stored procedure 
+            DB.Execute("sproc_tblOrder_FilterByOrderId");
+            // if one record is found (there should be either zero or one!)
+            if (DB.Count == 1)
+            {
+                // copy the data from database to the private data members
+                mOrderId = Convert.ToInt32(DB.DataTable.Rows[0]["OrderId"]);
+                mCustomerId = Convert.ToInt32(DB.DataTable.Rows[0]["CustomerId"]);
+                mShippingAddress = Convert.ToString(DB.DataTable.Rows[0]["ShippingAddress"]);
+                mShippingDate = Convert.ToDateTime(DB.DataTable.Rows[0]["ShippingDate"]);
+                mPayment = Convert.ToBoolean(DB.DataTable.Rows[0]["Payment"]);
+                mTotalPrice = Convert.ToDouble(DB.DataTable.Rows[0]["TotalPrice"]);
+
+                mActive = Convert.ToBoolean(DB.DataTable.Rows[0]["Active"]);
+
+                // return that everything worked OK
+                return true;
+            }
+            // if no record was found 
+            else
+            {
+                // return false indicating a problem
+                return false;
+            }
+
+
+
+
         }
     }
 }

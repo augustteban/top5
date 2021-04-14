@@ -148,11 +148,11 @@ namespace Testing5
             //boolean variable to record if data is OK (assume it is)
             Boolean OK = true;
             //create some test data to use with the method
-            Int32 OrderId = 21;
+            Int32 OrderId = 1011;
             //invoke the method
             Found = AnOrder.Find(OrderId);
             //check the address no
-            if (AnOrder.OrderId != 21)
+            if (AnOrder.OrderId != 1011)
             {
                 OK = false;
             }
@@ -171,11 +171,11 @@ namespace Testing5
             //boolean variable to record if data is OK (assume it is)
             Boolean OK = true;
             //create some test data to use with the method
-            Int32 OrderId = 21;
+            Int32 OrderId = 1011;
             //invoke the method
             Found = AnOrder.Find(OrderId);
             //check the address no
-            if (AnOrder.CustomerId != 21)
+            if (AnOrder.CustomerId != 1011)
             {
                 OK = false;
             }
@@ -193,7 +193,7 @@ namespace Testing5
             //boolean variable to record if data is OK (assume it is)
             Boolean OK = true;
             //create some test data to use with the method
-            Int32 OrderId = 21;
+            Int32 OrderId = 1011;
             //invoke the method
             Found = AnOrder.Find(OrderId);
             //check the address no
@@ -216,7 +216,7 @@ namespace Testing5
             //boolean variable to record if data is OK (assume it is)
             Boolean OK = true;
             //create some test data to use with the method
-            Int32 OrderId = 21;
+            Int32 OrderId = 1011;
             //invoke the method
             Found = AnOrder.Find(OrderId);
             //check the address no
@@ -238,7 +238,7 @@ namespace Testing5
             //boolean variable to record if data is OK (assume it is)
             Boolean OK = true;
             //create some test data to use with the method
-            Int32 OrderId = 21;
+            Int32 OrderId = 1011;
             //invoke the method
             Found = AnOrder.Find(OrderId);
             //check the address no
@@ -260,11 +260,11 @@ namespace Testing5
             //boolean variable to record if data is OK (assume it is)
             Boolean OK = true;
             //create some test data to use with the method
-            Int32 OrderId = 21;
+            Int32 OrderId = 1011;
             //invoke the method
             Found = AnOrder.Find(OrderId);
             //check the address no
-            if (AnOrder.TotalPrice != 21)
+            if (AnOrder.TotalPrice != 1011)
             {
                 OK = false;
             }

@@ -29,7 +29,7 @@ namespace TestingOrder
         {
             get
             {
-                // this lineof code sends data out of the property 
+                // this line of code sends data out of the property 
                 return mOrderLineId;
             }
             
@@ -175,6 +175,97 @@ namespace TestingOrder
 
 
 
+        }
+
+        public string Valid(string orderId, string itemId, string quantity, string description, string price)
+        {
+            // create a string variable to store the error
+
+            string Error = "";
+
+            // if the OrderId is blank 
+
+            if (orderId.Length == 0)
+            {
+
+            // record the error 
+
+                Error = Error + "The order id may not be blank";
+            }
+
+            if (orderId.Length > 6)
+            {
+
+                Error = Error + "The order id must be less than 6 characters";
+            }
+              // if the itemId is blank 
+
+            if (itemId.Length == 0)
+                {
+
+             // record the error 
+
+                    Error = Error + "The item id may not be blank";
+                }
+
+            if (itemId.Length > 6)
+                {
+
+
+                    Error = Error + "The item id must be less than 6 characters";
+            }
+
+            // if the quantity is blank 
+
+            if (quantity.Length == 0)
+            {
+
+             // record the error 
+
+                Error = Error + "The quantity  may not be blank";
+            }
+
+            if (quantity.Length > 6)
+            {
+
+                Error = Error + "The quantity  must be less than 6 characters";
+            }
+
+
+            // if the description is blank 
+
+            if (description.Length == 0)
+            {
+
+            // record the error 
+
+                Error = Error + "The description  may not be blank";
+            }
+
+            if (description.Length > 6)
+            {
+
+                Error = Error + "The description  must be less than 6 characters";
+            }
+
+            // if the price is blank 
+
+            if (price.Length == 0)
+            {
+
+            // record the error 
+
+                Error = Error + "The price  may not be blank";
+            }
+
+            if (price.Length > 6)
+            {
+
+                Error = Error + "The price  must be less than 6 characters";
+            }
+
+
+            return "";
         }
     }
 }

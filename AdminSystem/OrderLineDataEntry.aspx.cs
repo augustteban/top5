@@ -18,16 +18,27 @@ public partial class _1_DataEntry : System.Web.UI.Page
         // create a new instance of clsOrderLine
         clsOrderLine AnOrderLine = new clsOrderLine();
 
-        AnOrderLine.OrderLineId = Int32.Parse(txtOrderLineId.Text);
-        AnOrderLine.OrderId = Int32.Parse(txtOrderId.Text);
-        AnOrderLine.ItemId = Int32.Parse(txtItemId.Text);
-        AnOrderLine.Quantity = Int32.Parse(txtQuantity.Text);
-        AnOrderLine.Description = txtDescription.Text;
-        AnOrderLine.Price = Double.Parse(txtPrice.Text);
+        string OrderLineId = txtOrderLineId.Text;
+        string OrderId = txtOrderId.Text;
+        string ItemId = txtItemId.Text;
+        string Quantity = txtQuantity.Text;
+        string Description = txtDescription.Text;
+        string Price = txtPrice.Text;
+
+        string Error="";
+        Error = AnOrderLine.Valid(OrderId, ItemId, Quantity, Description, Price); 
+
+        if (Error == "")
+        AnOrderLine.OrderLineId = OrderLineId;
+        AnOrderLine.OrderId = OrderId;
+        AnOrderLine.ItemId = ItemId;
+        AnOrderLine.Quantity = Quantity;
+        AnOrderLine.Description = Description;
+        AnOrderLine.Price = Price;
         Session["AnOrderLine"] = AnOrderLine;
 
         // nevigate to the viewr page
-        Response.Redirect("OrderLineViewer.aspx");
+        Response.Write("OrderLineViewer.aspx");
     }
 
     protected void btnFind_Click(object sender, EventArgs e)

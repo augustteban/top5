@@ -9,7 +9,7 @@ namespace TestingOrder
         {
             get
             {
-                // this lineof code sends data out of the property 
+                // this line of code sends data out of the property 
                 return mActive;
             }
 
@@ -169,5 +169,56 @@ namespace TestingOrder
 
 
         }
+
+        public string Valid(string customerId, string shippingAddress, string shippingDate, string totalPrice)
+        {
+
+            //create a string variable to store the error 
+
+            String Error = "";
+
+            //create a temporary variable to store date values
+
+            DateTime DateTemp;
+
+            //if the CustomerId is blank
+
+            if (customerId.Length == 0)
+            {
+                //record the error
+
+                Error = Error + "The customer id may not be blank : ";
+            }
+
+            //if the CustomerId is greater than 6 characters
+
+            if (customerId.Length > 6)
+            {
+                //record the error
+                Error = Error + "The customerId must be less than 6 characters : ";
+            }
+
+            //copy the shippingDate value to the DateTemp variable
+
+            DateTemp = Convert.ToDateTime(shippingDate);
+            if (DateTemp < DateTime.Now.Date)
+            {
+                //record the error
+
+                Error = Error + "The date cannot be in the past : ";
+            }
+
+            //check to see if the date is greater than today's date
+
+            if (DateTemp > DateTime.Now.Date)
+            {
+                //record the error
+                Error = Error + "The date cannot be in the future : ";
+            }
+            //return any error messages
+            return Error;
+        }
+
+            
+        }
     }
-}

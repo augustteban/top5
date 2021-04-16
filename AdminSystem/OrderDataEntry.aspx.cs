@@ -16,24 +16,34 @@ public partial class _1_DataEntry : System.Web.UI.Page
     protected void btnOK_Click(object sender, EventArgs e)
     {
 
-        // create a new instance of clsOrderLine
+        // create a new instance of clsOrder
         clsOrder AnOrder = new clsOrder();
 
-        
-        AnOrder.OrderId = Int32.Parse(txtOrderId.Text);
-        AnOrder.CustomerId = Int32.Parse(txtCustomerId.Text);
-        AnOrder.ShippingAddress = txtShippingAddress.Text;
-        AnOrder.ShippingDate = DateTime.Parse(txtShippingDate.Text);
-        AnOrder.Payment = Boolean.Parse(txtPayment.Text);
-        AnOrder.TotalPrice = Double.Parse(txtTotalPrice.Text);
+        string OrderId = txtOrderId.Text;
+        string CustomerId = txtCustomerId.Text;
+        string ShippingAddress = txtShippingAddress.Text;
+        string ShippingDate = txtShippingDate.Text;
+        string Payment = txtPayment.Text;
+        string TotalPrice = txtTotalPrice.Text;
+
+        string Error = "";
+
+        Error = AnOrder.Valid(CustomerId, ShippingAddress, ShippingDate, TotalPrice);
+        if (Error == "")
+            AnOrder.OrderId = OrderId;
+        AnOrder.CustomerId = CustomerId;
+        AnOrder.ShippingAddress = ShippingAddress;
+        AnOrder.ShippingDate = ShippingDate;
+        AnOrder.Payment = Payment;
+        AnOrder.TotalPrice = TotalPrice;
         Session["AnOrder"] = AnOrder;
 
+        // nevigate to the viewr page
+        Response.Write("OrderViewer.aspx");
 
-        //navigate to the viewer page
-        Response.Redirect("OrderViewer.aspx");
     }
 
-    protected void btnFind_Click(object sender, EventArgs e)
+        protected void btnFind_Click(object sender, EventArgs e)
     {
         //create an instance of the OrderLine class
 

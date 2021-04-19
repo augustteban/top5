@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using TestingOrder;
+using ClassLibrary;
 
 public partial class _1_DataEntry : System.Web.UI.Page
 {
@@ -19,7 +20,6 @@ public partial class _1_DataEntry : System.Web.UI.Page
         // create a new instance of clsOrder
         clsOrder AnOrder = new clsOrder();
 
-        string OrderId = txtOrderId.Text;
         string CustomerId = txtCustomerId.Text;
         string ShippingAddress = txtShippingAddress.Text;
         string ShippingDate = txtShippingDate.Text;
@@ -30,18 +30,34 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
         Error = AnOrder.Valid(CustomerId, ShippingAddress, ShippingDate, TotalPrice);
         if (Error == "")
-            AnOrder.OrderId = OrderId;
+        { 
+        
         AnOrder.CustomerId = CustomerId;
         AnOrder.ShippingAddress = ShippingAddress;
         AnOrder.ShippingDate = ShippingDate;
         AnOrder.Payment = Payment;
         AnOrder.TotalPrice = TotalPrice;
-        Session["AnOrder"] = AnOrder;
+        AnOrder.Active = chkActive.Checked;
 
-        // nevigate to the viewr page
-        Response.Write("OrderViewer.aspx");
+            // create an instance of the address collection
+            clsOrderCollection AddressList = new clsOrderCollection();
 
-    }
+            // set the ThisAddress of the address collection
+            AddressList.ThisAddress = AnOrder;
+
+            // add a new record
+            AddressList.Add();
+
+            // redirect back tp the listpage
+            Response.Redirect("OrderList.aspx");
+        }
+        else
+        {
+
+            // display the error message
+            lblError.Text = Error;
+
+        }
 
         protected void btnFind_Click(object sender, EventArgs e)
     {

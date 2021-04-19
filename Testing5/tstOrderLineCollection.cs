@@ -135,6 +135,40 @@ namespace TestingOrder
             Assert.AreEqual(AllAddresses.Count, TestList.Count);
         }
 
+        public void AddMethodOK()
+        {
+            clsOrderLineCollection AllAddresses = new clsOrderLineCollection();
+
+            // create some test data to assign to the property 
+            clsOrderLine TestItem = new clsOrderLine();
+
+            // var to store the primary key
+            Int32 PrimaryKey = 0;
+
+            //set the properties 
+            TestItem.Active = true;
+            TestItem.OrderLineId = 1;
+            TestItem.OrderId = 1015;
+            TestItem.ItemId = 1;
+            TestItem.Quantity = 2;
+            TestItem.Description = "Red short";
+            TestItem.Price = 10.0;
+
+            // set ThisAddress to test data
+            AllAddresses.ThisAddress = TestItem;
+
+            // add the record
+            PrimaryKey = AllAddresses.Add();
+
+            // set teh primary key of the test data
+            TestItem.OrderLineId = PrimaryKey;
+
+            // find the record
+            AllAddresses.ThisAddress.Find(PrimaryKey);
+
+            // test to see the two values are the same 
+            Assert.AreEqual(AllAddresses.ThisAddress, TestItem);
+        }
 
     }
 }

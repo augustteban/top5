@@ -8,6 +8,9 @@ namespace ClassLibrary
     {
         List<clsOrder> mAddressList = new List<clsOrder>();
 
+        // private data member ThisAddress
+        clsOrder mThisAddress = new clsOrder();
+
         public clsOrderCollection()
         {
             // create the item of test data
@@ -110,8 +113,37 @@ namespace ClassLibrary
         }
 
 
-        public clsOrder ThisAddress { get; set; }
+        public clsOrder ThisAddress
+        {
+            get
+            {
+                return mThisAddress;
+            }
+            set
+            {
+                // set the private data
+                mThisAddress = value;
+            }
+        }
 
+        public int Add()
+        {
+            // add a new record to the database based on the values of mThisAddress
+            // set the primary key value of the new record
+            mThisAddress.OrderId = 5;
+        
+            // connect to the database
+            clsDataConnection DB = new clsDataConnection();
 
+            DB.AddParameter("@CustomerId", mThisAddress.CustomerId);
+            DB.AddParameter("@ShippingAddress", mThisAddress.ShippingAddress);
+            DB.AddParameter("@ShippingDate", mThisAddress.ShippingDate);
+            DB.AddParameter("@Payment", mThisAddress.Payment);
+            DB.AddParameter("@TotalPrice", mThisAddress.TotalPrice);
+            DB.AddParameter("@Active", mThisAddress.Active);
+
+            // excute the query returning the primary key value
+            return DB.Execute("sproc_tblOrder_Insert");
+        }
     }
 }

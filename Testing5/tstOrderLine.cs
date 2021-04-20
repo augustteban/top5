@@ -1,6 +1,7 @@
 ﻿using System;
 using TestingOrder;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using ClassLibrary;
 
 namespace TestingOrder
 {

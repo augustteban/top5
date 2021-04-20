@@ -9,6 +9,7 @@ using ClassLibrary;
 
 public partial class _1_DataEntry : System.Web.UI.Page
 {
+    Int32 OrderLineId;
     protected void Page_Load(object sender, EventArgs e)
     {
 
@@ -19,37 +20,51 @@ public partial class _1_DataEntry : System.Web.UI.Page
         // create a new instance of clsOrderLine
         clsOrderLine AnOrderLine = new clsOrderLine();
 
-        
+
         string OrderId = txtOrderId.Text;
         string ItemId = txtItemId.Text;
         string Quantity = txtQuantity.Text;
         string Description = txtDescription.Text;
         string Price = txtPrice.Text;
 
-        string Error="";
-        Error = AnOrderLine.Valid(OrderId, ItemId, Quantity, Description, Price); 
+        string Error = "";
+        Error = AnOrderLine.Valid(OrderId, ItemId, Quantity, Description, Price);
 
         if (Error == "")
-        {  
-        AnOrderLine.OrderId = OrderId;
-        AnOrderLine.ItemId = ItemId;
-        AnOrderLine.Quantity = Quantity;
-        AnOrderLine.Description = Description;
-        AnOrderLine.Price = Price;
-        AnOrderLine.Active = chkActive.Checked;
+        {
+            AnOrderLine.OrderId = OrderId;
+            AnOrderLine.ItemId = ItemId;
+            AnOrderLine.Quantity = Quantity;
+            AnOrderLine.Description = Description;
+            AnOrderLine.Price = Price;
+            AnOrderLine.Active = chkActive.Checked;
 
-        // create an instance of the address collection
-        clsOrderLineCollection AddressList = new clsOrderLineCollection();
+            // create an instance of the address collection
+            clsOrderLineCollection AddressList = new clsOrderLineCollection();
 
-         // set the ThisAddress of the address collection
-         AddressList.ThisAddress = AnOrderLine;
+            // if this a new record i.e. OrderLineId = -1 then add the data 
+            if (OrderLineId == -1)
+            {
+                // set the ThisAddress property
+                AddressList.ThisAddress = AnOrderLine;
 
-         // add a new record
-         AddressList.Add();
+                // add a new record
+                AddressList.Add();
+            }
+            // otherwise it must be an update
+            else
+            {
+                // find the record to update 
+                AddressList.ThisAddress.Find(OrderLineId);
+                // set the ThisAddress property 
+                AddressList.ThisAddress = AnOrderLine;
+                // update the record
+                AddressList.Update();
+            }
 
-         // redirect back tp the listpage
-         Response.Redirect("OrderLineList.aspx");     
-    }
+            // redirect back tp the listpage
+            Response.Redirect("OrderLineList.aspx");
+        }
         else
         {
 
@@ -59,6 +74,8 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
 
 
+
+    }
     protected void btnFind_Click(object sender, EventArgs e)
     {
         //create an instance of the OrderLine class

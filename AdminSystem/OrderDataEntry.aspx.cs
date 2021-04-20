@@ -9,6 +9,7 @@ using ClassLibrary;
 
 public partial class _1_DataEntry : System.Web.UI.Page
 {
+    Int32 OrderId;
     protected void Page_Load(object sender, EventArgs e)
     {
 
@@ -30,23 +31,35 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
         Error = AnOrder.Valid(CustomerId, ShippingAddress, ShippingDate, TotalPrice);
         if (Error == "")
-        { 
-        
-        AnOrder.CustomerId = CustomerId;
-        AnOrder.ShippingAddress = ShippingAddress;
-        AnOrder.ShippingDate = ShippingDate;
-        AnOrder.Payment = Payment;
-        AnOrder.TotalPrice = TotalPrice;
-        AnOrder.Active = chkActive.Checked;
+        {
+
+            AnOrder.CustomerId = CustomerId;
+            AnOrder.ShippingAddress = ShippingAddress;
+            AnOrder.ShippingDate = ShippingDate;
+            AnOrder.Payment = Payment;
+            AnOrder.TotalPrice = TotalPrice;
+            AnOrder.Active = chkActive.Checked;
 
             // create an instance of the address collection
             clsOrderCollection AddressList = new clsOrderCollection();
 
-            // set the ThisAddress of the address collection
-            AddressList.ThisAddress = AnOrder;
+            // if this record i.e OrderId = -1 then addthe data 
+            if (OrderId == -1)
+            {
 
-            // add a new record
-            AddressList.Add();
+                // set the ThisAddress of the address collection
+                AddressList.ThisAddress = AnOrder;
+
+                // add a new record
+                AddressList.Add();
+            }
+
+            else
+            {
+                AddressList.ThisAddress.Find(OrderId);
+                AddressList.ThisAddress = AnOrder;
+                AddressList.Update();
+            }
 
             // redirect back tp the listpage
             Response.Redirect("OrderList.aspx");
@@ -60,40 +73,41 @@ public partial class _1_DataEntry : System.Web.UI.Page
         }
 
         protected void btnFind_Click(object sender, EventArgs e)
-    {
-        //create an instance of the OrderLine class
-
-        clsOrder AnOrder = new clsOrder();
-
-        // variable to store the result of the primary key
-
-        Int32 OrderId;
-
-        // variable to store the result of the find operation
-
-        Boolean Found = false;
-
-        // get the primary key entered by the user 
-
-        OrderId = Convert.ToInt32(txtOrderId.Text);
-
-        // find the record 
-
-        Found = AnOrder.Find(OrderId);
-
-        // if found 
-
-        if (Found == true)
         {
+            //create an instance of the OrderLine class
 
-            // display the values of the properties in the form 
+            clsOrder AnOrder = new clsOrder();
 
-            txtCustomerId.Text = AnOrder.CustomerId.ToString();
-            txtShippingAddress.Text = AnOrder.ShippingAddress;
-            txtShippingDate.Text = AnOrder.ShippingDate.ToString();
-            txtPayment.Text = AnOrder.Payment.ToString();
-            txtTotalPrice.Text = AnOrder.TotalPrice.ToString();
+            // variable to store the result of the primary key
 
+            Int32 OrderId;
+
+            // variable to store the result of the find operation
+
+            Boolean Found = false;
+
+            // get the primary key entered by the user 
+
+            OrderId = Convert.ToInt32(txtOrderId.Text);
+
+            // find the record 
+
+            Found = AnOrder.Find(OrderId);
+
+            // if found 
+
+            if (Found == true)
+            {
+
+                // display the values of the properties in the form 
+
+                txtCustomerId.Text = AnOrder.CustomerId.ToString();
+                txtShippingAddress.Text = AnOrder.ShippingAddress;
+                txtShippingDate.Text = AnOrder.ShippingDate.ToString();
+                txtPayment.Text = AnOrder.Payment.ToString();
+                txtTotalPrice.Text = AnOrder.TotalPrice.ToString();
+
+            }
         }
     }
 }

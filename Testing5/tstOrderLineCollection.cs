@@ -170,5 +170,57 @@ namespace TestingOrder
             Assert.AreEqual(AllAddresses.ThisAddress, TestItem);
         }
 
+        [TestMethod]
+        public void UpdateMethodOK()
+        {
+
+            // create an instance of the class we want to create 
+            clsOrderLineCollection AllAddresses = new clsOrderLineCollection();
+
+            // create the item of test data
+            clsOrderLine TestItem = new clsOrderLine();
+
+            // var to store the primary key
+            Int32 PrimaryKey = 0;
+
+            //set its properties 
+            TestItem.Active = true;
+            TestItem.OrderId = 1;
+            TestItem.ItemId = 1;
+            TestItem.Quantity = 1;
+            TestItem.Description = "Red short";
+            TestItem.Price = 1.0;
+
+            // set ThisAddress to test data
+            AllAddresses.ThisAddress = TestItem;
+
+            // add the record
+            PrimaryKey = AllAddresses.Add();
+
+            // set teh primary key of the test data
+            TestItem.OrderLineId = PrimaryKey;
+
+            // modify the test data
+            TestItem.Active = false;
+            TestItem.OrderLineId = 1;
+            TestItem.OrderId = 1015;
+            TestItem.ItemId = 1;
+            TestItem.Quantity = 2;
+            TestItem.Description = "Red short";
+            TestItem.Price = 10.0;
+
+            // set the record based on the new test data 
+            AllAddresses.ThisAddress = TestItem;
+
+            // update teh record
+            AllAddresses.Update();
+
+            // find the record
+            AllAddresses.ThisAddress.Find(PrimaryKey);
+
+            // test to see the two values are the same 
+            Assert.AreEqual(AllAddresses.ThisAddress, TestItem);
+        }
+
     }
 }

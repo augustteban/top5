@@ -143,9 +143,24 @@ namespace ClassLibrary
             DB.AddParameter("@Active", mThisAddress.Active);
 
             // excute the query returning the primary key value
-            return DB.Execute("sproc_tblOrderLine_Insert");
-            
+            return DB.Execute("sproc_tblOrderLine_Insert");           
+        }
 
+        public void Update()
+        {
+            // connect to the database
+            clsDataConnection DB = new clsDataConnection();
+
+            DB.AddParameter("@OrderLineId", mThisAddress.OrderLineId);
+            DB.AddParameter("@OrderId", mThisAddress.OrderId);
+            DB.AddParameter("@ItemId", mThisAddress.ItemId);
+            DB.AddParameter("@Quantity", mThisAddress.Quantity);
+            DB.AddParameter("@Description", mThisAddress.Description);
+            DB.AddParameter("@Price", mThisAddress.Price);
+            DB.AddParameter("@Active", mThisAddress.Active);
+
+            // excute the query returning the primary key value
+            DB.Execute("sproc_tblOrderLine_Update");
         }
     }
-}
+    }

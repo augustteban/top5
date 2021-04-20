@@ -2,7 +2,7 @@
 using TestingOrder;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Testing5
+namespace TestingOrder
 {
     [TestClass]
     public class tstOrder
@@ -768,7 +768,7 @@ namespace Testing5
 
             // change the date variable to a string variable
 
-            TestDate = TestDate.AddDays(1)
+            TestDate = TestDate.AddDays(1);
 
             //convert the date variable to a string variable
 
@@ -815,7 +815,7 @@ namespace Testing5
 
             // change the date variable to a string variable
 
-            TestDate = TestDate.AddDays(100)
+            TestDate = TestDate.AddDays(100);
 
             //convert the date variable to a string variable
 

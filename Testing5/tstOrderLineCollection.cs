@@ -17,8 +17,8 @@ namespace TestingOrder
         public void InstanceOK()
         {
 
-        // create an instance of the class we want to create 
-        clsOrderLineCollection AllAddresses = new clsOrderLineCollection();
+            // create an instance of the class we want to create 
+            clsOrderLineCollection AllAddresses = new clsOrderLineCollection();
 
             // test to see that exists 
             Assert.IsNotNull(AllAddresses);
@@ -222,5 +222,49 @@ namespace TestingOrder
             Assert.AreEqual(AllAddresses.ThisAddress, TestItem);
         }
 
+        [TestMethod]
+        public void DeleteMethodOK()
+        {
+
+            // create an instance of the class we want to create 
+            clsOrderLineCollection AllAddresses = new clsOrderLineCollection();
+
+            // create the item of test data
+            clsOrderLine TestItem = new clsOrderLine();
+
+            // var to store the primary key
+            Int32 PrimaryKey = 0;
+
+            //set its properties
+            TestItem.Active = true;
+            TestItem.OrderLineId = 1;
+            TestItem.OrderId = 1;
+            TestItem.ItemId = 1;
+            TestItem.Quantity = 1;
+            TestItem.Description = "Red short";
+            TestItem.Price = 1.0;
+
+            // set ThisAddress to test data
+            AllAddresses.ThisAddress = TestItem;
+
+            // add the record
+            PrimaryKey = AllAddresses.Add();
+
+            // set teh primary key of the test data
+            TestItem.OrderLineId = PrimaryKey;
+
+            // find the record 
+            AllAddresses.ThisAddress.Find(PrimaryKey);
+
+            // delete teh record 
+            AllAddresses.Delete();
+
+            // now find the record
+            Boolean Found = AllAddresses.ThisAddress.Find(PrimaryKey);
+
+            // test to see that the record was not found 
+            Assert.IsFalse(Found);
+
+        }
     }
 }

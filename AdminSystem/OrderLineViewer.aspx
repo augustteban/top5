@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="OrderLineViewer.aspx.cs" Inherits="AnOrderLine" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="OrderLineViewer.aspx.cs" Inherits="_1_Viewer" %>
 
 <!DOCTYPE html>
 <script runat="server">

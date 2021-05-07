@@ -55,10 +55,9 @@ namespace Testing6
         public void IsManagerPropertyOK()
         {
             clsStaff Staff = new clsStaff();
-            Boolean TestData = true / false;
+
             Staff.IsManager = TestData;
             Assert.AreEqual(Staff.IsManager, TestData);
         }
 
-    }
-}
+

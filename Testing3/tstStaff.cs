@@ -27,7 +27,7 @@ namespace Testing6
         public void StaffNamePropertyOK()
         {
             clsStaff Staff = new clsStaff();
-            string TestData = "Name";
+            string TestData = "Staff Name";
             Staff.Name = TestData;
             Assert.AreEqual(Staff.Name, TestData);
         }
@@ -59,5 +59,92 @@ namespace Testing6
             Staff.IsManager = TestData;
             Assert.AreEqual(Staff.IsManager, TestData);
         }
+
+        [TestMethod]
+        public void FindMethodOK()
+        {
+            clsStaff Staff = new clsStaff();
+            Boolean Found = false;
+            Int32 StaffID = 1;
+            Found = Staff.Find(StaffID);
+            Assert.IsTrue(Found);
+        }
+
+        [TestMethod]
+        public void TestStaffIDFound()
+        {
+            clsStaff Staff = new clsStaff();
+            Boolean Found = false;
+            Boolean OK = true;
+            Int32 StaffID = 1;
+            Found =Staff.Find(StaffID);
+            if (Staff.StaffID != 1)
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestStaffNameFound()
+        {
+            clsStaff Staff = new clsStaff();
+            Boolean Found = false;
+            Boolean OK = true;
+            Int32 StaffID = 1;
+            Found = Staff.Find(StaffID);
+            if (Staff.StaffName != "Staff Name")
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestJobRoleFound()
+        {
+            clsStaff Staff = new clsStaff();
+            Boolean Found = false;
+            Boolean OK = true;
+            Int32 StaffID = 1;
+            Found = Staff.Find(StaffID);
+            if (Staff.JobRole != "Job Role")
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestDateAddedFound()
+        {
+            clsStaff Staff = new clsStaff();
+            Boolean Found = false;
+            Boolean OK = true;
+            Int32 StaffID = 1;
+            Found = Staff.Find(StaffID);
+            if (Staff.CreatedAt != Convert.ToDateTime ("20/03/2021"))
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestIsManagerFound()
+        {
+            clsStaff Staff = new clsStaff();
+            Boolean Found = false;
+            Boolean OK = true;
+            Int32 StaffID = 1;
+            Found = Staff.Find(StaffID);
+            if (Staff.IsManager != true)
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
+    }
+}
 
 

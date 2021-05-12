@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace Class_Library
+namespace Testing6
 {
     public class clsStaff
     {
@@ -84,3 +85,4 @@ namespace Class_Library
         }
     }
 }
+

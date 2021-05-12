@@ -1,6 +1,5 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Class_Library;
 
 namespace Testing6
 {
@@ -28,17 +27,17 @@ namespace Testing6
         {
             clsStaff Staff = new clsStaff();
             string TestData = "Staff Name";
-            Staff.Name = TestData;
-            Assert.AreEqual(Staff.Name, TestData);
+            Staff.StaffName = TestData;
+            Assert.AreEqual(Staff.StaffName, TestData);
         }
 
 
         [TestMethod]
         public void JobRolePropertyOK()
         {
-            clsStaff AnStaff = new clsStaff();
+            clsStaff Staff = new clsStaff();
             string TestData = "Job Role";
-            AnStaff.StaffNo = TestData;
+            Staff.JobRole = TestData;
             Assert.AreEqual(Staff.JobRole, TestData);
         }
 
@@ -47,7 +46,7 @@ namespace Testing6
         {
             clsStaff Staff = new clsStaff();
             DateTime TestData = DateTime.Now.Date;
-            AnAddress.CountyNo = TestData;
+            Staff.DateAdded = TestData;
             Assert.AreEqual(Staff.DateAdded, TestData);
         }
 
@@ -55,7 +54,7 @@ namespace Testing6
         public void IsManagerPropertyOK()
         {
             clsStaff Staff = new clsStaff();
-
+            Boolean TestData = true;
             Staff.IsManager = TestData;
             Assert.AreEqual(Staff.IsManager, TestData);
         }
@@ -123,7 +122,7 @@ namespace Testing6
             Boolean OK = true;
             Int32 StaffID = 1;
             Found = Staff.Find(StaffID);
-            if (Staff.CreatedAt != Convert.ToDateTime ("20/03/2021"))
+            if (Staff.DateAdded != Convert.ToDateTime ("20/03/2021"))
             {
                 OK = false;
             }
